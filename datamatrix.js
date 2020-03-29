@@ -20,7 +20,7 @@ module.exports = function (RED) {
                         node.send(msg);
                         node.status({})
                     } catch (e) {
-                        node.error(err);
+                        node.error(e);
                         node.status({fill: "red", shape: "ring", text: "Error"});
                     }
                 } else {
