@@ -7,17 +7,23 @@ module.exports = function (RED) {
         var node = this;
         node.on('input', function (msg) {
             node.status({fill: "blue", shape: "dot", text: "Analyzing"});
-            cv.readImage(msg.payload, function (err, mat) {
-                let result = dmCodec.decode({
-                    width: mat.width(),
-                    height: mat.height(),
-                    channels: mat.channels(),
-                    data: mat.getData(),
+            try {
+                cv.readImage(msg.payload, function (err, mat) {
+                    let result = dmCodec.decode({
+                        width: mat.width(),
+                        height: mat.height(),
+                        channels: mat.channels(),
+                        data: mat.getData(),
+                    });
+                    msg.payload = result;
+                    node.send(msg);
+                    node.status({})
                 });
-                msg.payload = result;
+            } catch (e) {
+                msg.payload = e;
                 node.send(msg);
-                node.status({})
-            });
+                node.status({fill:"red",shape:"ring",text:"error"})
+            }
         });
     }
 
