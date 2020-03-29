@@ -7,7 +7,7 @@ module.exports = function (RED) {
         var node = this;
         node.on('input', function (msg) {
             node.status({fill: "blue", shape: "dot", text: "Analyzing"});
-            cv.readImage(msg.payload, function (err, im) {
+            cv.readImage(msg.payload, function (err, mat) {
                 let result = dmCodec.decode({
                     width: mat.width(),
                     height: mat.height(),
