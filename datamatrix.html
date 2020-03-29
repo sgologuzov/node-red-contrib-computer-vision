@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('datamatrix',{
+        category: 'analysis',
+        color: 'white',
+        defaults: {
+            name: { value: "" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "datamatrix.png",
+        label: function() {
+            return this.name || "datamatrix";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="datamatrix">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="datamatrix">
+    <p>Datamatrix reader</p>
+</script>
